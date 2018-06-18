@@ -6,7 +6,7 @@ import { Component} from '@angular/core';
 })
 export class QuestionComponent {  
     
-    post() {
-        console.log("test")
+    post(question) {
+        console.log("question")
     }
 }
