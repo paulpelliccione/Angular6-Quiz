@@ -7,11 +7,14 @@ import {FormsModule} from '@angular/forms'
 import { AppComponent } from './app.component';
 import {QuestionComponent} from './question.component';
 import { ApiService } from './api.service';
+import {QuestionsComponent} from './questons.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    QuestionComponent
+    QuestionComponent,
+    QuestionsComponent
   ],
   imports: [
     BrowserModule,
