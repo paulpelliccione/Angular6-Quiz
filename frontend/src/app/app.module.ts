@@ -6,8 +6,9 @@ import {MatButtonModule, MatInputModule, MatCardModule, MatListModule} from '@an
 import {FormsModule} from '@angular/forms'
 import { AppComponent } from './app.component';
 import {QuestionComponent} from './question.component';
+import {QuestionsComponent} from './questions.component';
 import { ApiService } from './api.service';
-import {QuestionsComponent} from './questons.component';
+
 
 
 @NgModule({
@@ -15,6 +16,8 @@ import {QuestionsComponent} from './questons.component';
     AppComponent,
     QuestionComponent,
     QuestionsComponent
+
+
   ],
   imports: [
     BrowserModule,

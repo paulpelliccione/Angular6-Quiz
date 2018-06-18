@@ -7,5 +7,5 @@ import {QuestionComponent} from './question.component';
   
 })
 export class AppComponent {
-  title = 'my-ap';
+  title = 'myapp';
 }

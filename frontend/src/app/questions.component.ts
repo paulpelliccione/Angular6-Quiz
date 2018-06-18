@@ -8,15 +8,16 @@ import { ApiService } from './api.service';
 export class QuestionsComponent {  
     
     question = {}
+    questions
     
     constructor(private api: ApiService) {
     }
 
-ngOnInit() {
-    this.api.getQuestions().subscribe(res =>{
-        console.log(res)
-    })
-}
+    ngOnInit() {
+        this.api.getQuestions().subscribe(res => {
+           this.questions = res
+        })
+    }
 
     post(question) {
        this.api.postQuestion(question)
