@@ -12,6 +12,12 @@ export class QuestionsComponent {
     constructor(private api: ApiService) {
     }
 
+ngOnInit() {
+    this.api.getQuestions().subscribe(res =>{
+        console.log(res)
+    })
+}
+
     post(question) {
        this.api.postQuestion(question)
     }
