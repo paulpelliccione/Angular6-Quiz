@@ -4,6 +4,7 @@
 .fullWidth {
     width: 100%
 }
+/*pointer for mouse, in mat-list-item class="clickLink", questions.html*/
 .clickLink {
     cursor: pointer
 }
