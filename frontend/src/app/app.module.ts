@@ -9,9 +9,12 @@ import { AppComponent } from './app.component';
 import {QuestionComponent} from './question.component';
 import {QuestionsComponent} from './questions.component';
 import { ApiService } from './api.service';
+import { HomeComponent } from './home.component';
+
 
 
 const routes = [
+  {path: '', component: HomeComponent},
   {path: 'question', component: QuestionComponent},
   {path: 'questions', component: QuestionsComponent},
 
@@ -21,7 +24,8 @@ const routes = [
   declarations: [
     AppComponent,
     QuestionComponent,
-    QuestionsComponent
+    QuestionsComponent,
+    HomeComponent
 
 
   ],

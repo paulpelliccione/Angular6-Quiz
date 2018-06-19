@@ -3,9 +3,9 @@ import {QuestionComponent} from './question.component';
 
 @Component({
   selector: 'app-root',
-  template: '<router-outlet></router-outlet><question></question><questions></questions>'
+  template: '<router-outlet></router-outlet>'
   
 })
 export class AppComponent {
-  title = 'myapp';
+
 }
