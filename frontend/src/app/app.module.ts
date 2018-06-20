@@ -18,7 +18,7 @@ import { ApiService } from './api.service';
 import { HomeComponent } from './home.component';
 import { NavComponent } from './nav.component';
 import { QuizComponent } from './quiz.component';
-import { QuizziesComponent } from './quizzies.component';
+import { QuizzesComponent } from './quizzes.component';
 
 
 
@@ -27,7 +27,7 @@ const routes = [
   {path: 'question', component: QuestionComponent},
   {path: 'questions', component: QuestionsComponent},
   {path: 'quiz', component: QuizComponent},
-  {path: 'quizzies', component: QuizziesComponent}
+
 
 ]
 
@@ -39,7 +39,7 @@ const routes = [
     HomeComponent,
     NavComponent,
     QuizComponent,
-    QuizziesComponent
+    QuizzesComponent
 
 
   ],

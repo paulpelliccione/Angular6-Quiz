@@ -1,9 +1,8 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http"
-import { Subject } from 'rxjs';
+import { Injectable } from '@angular/core'
+import { HttpClient } from '@angular/common/http'
+import { Subject} from 'rxjs'
 
-
-@Injectable() 
+@Injectable()
 export class ApiService {
 
     private selectedQuestion = new Subject<any>();
@@ -11,45 +10,46 @@ export class ApiService {
 
     private selectedQuiz = new Subject<any>();
     quizSelected = this.selectedQuiz.asObservable();
-    
-    constructor(private http: HttpClient) { }
+
+    constructor(private http: HttpClient) {}
 
     getQuestions(){
-      return this.http.get('http://localhost:61142/api/questions');
-
-        }
-
-        postQuestion(question) {
-            this.http.post('http://localhost:61142/api/questions', question).subscribe(res => {
-                console.log(res)
-     })
-    
+        return this.http.get('http://localhost:61142/api/questions');
     }
 
-    putQuestion(question) {
-        this.http.put(`http://localhost:61142/api/questions/${question.id}`, question).subscribe(res =>{
+    getQuizzes(){
+        return this.http.get('http://localhost:61142/api/quizzes');
+    }
+
+    postQuestion(question){
+        this.http.post('http://localhost:61142/api/questions', question).subscribe(res => {
             console.log(res)
         })
     }
-    
-    getQuizzies(){
-        return this.http.get('http://localhost:61142/api/quizzies');
-  
-          }
 
-
-    postQuiz(quiz) {
-        this.http.post('http://localhost:61142/api/quizzies', quiz).subscribe(res => {
+    putQuestion(question) {
+        this.http.put(`http://localhost:61142/questions/${question.id}`, question).subscribe(res => {
             console.log(res)
- })
+        }) 
+    }
 
-}
-selectQuiz(question) {
-    this.selectedQuiz.next(question)
-}
+    postQuiz(quiz){
+        this.http.post('http://localhost:61142/api/quizzes', quiz).subscribe(res => {
+            console.log(res)
+        })
+    }
 
+    putQuiz(quiz) {
+        this.http.put(`http://localhost:61142/api/quizzes/${quiz.id}`, quiz).subscribe(res => {
+            console.log(res)
+        }) 
+    }
+    
     selectQuestion(question) {
         this.selectedQuestion.next(question)
     }
 
+    selectQuiz(quiz) {
+        this.selectedQuiz.next(quiz)
+    }
 }

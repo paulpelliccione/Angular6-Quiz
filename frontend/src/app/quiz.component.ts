@@ -14,8 +14,4 @@ export class QuizComponent {
     ngOnInit() {
         this.api.quizSelected.subscribe(quiz => this.quiz = quiz)
     }
-
-    post(quiz) {
-        this.api.postQuiz(quiz)
-    }
 }
