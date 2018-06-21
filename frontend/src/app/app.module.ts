@@ -15,6 +15,7 @@ import { AppComponent } from './app.component';
 import {QuestionComponent} from './question.component';
 import {QuestionsComponent} from './questions.component';
 import { ApiService } from './api.service';
+import { AuthService } from './auth.service';
 import { HomeComponent } from './home.component';
 import { NavComponent } from './nav.component';
 import { QuizComponent } from './quiz.component';
@@ -60,7 +61,7 @@ const routes = [
     ReactiveFormsModule
 
   ],
-  providers: [ApiService],
+  providers: [ApiService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
