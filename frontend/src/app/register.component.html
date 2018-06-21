@@ -1,7 +1,12 @@
 <mat-card>
-    <form>
+    <form [formGroup]="form">
         <mat-form-field>
-            <input matInput placeholder="Email">
+            <input matInput type="email" placeholder="Email">
         </mat-form-field>
+        &nbsp;
+        <mat-form-field>
+            <input matInput type="password" placeholder="Password">
+        </mat-form-field>
+        <button mat-raised-button color="primary">Register</button>
     </form>
 </mat-card>
