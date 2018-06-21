@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {HttpClientModule} from '@angular/common/http'
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
   MatButtonModule, 
@@ -11,16 +11,19 @@ import {
 from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms'
 import{RouterModule} from '@angular/router';
+
 import { AppComponent } from './app.component';
 import {QuestionComponent} from './question.component';
 import {QuestionsComponent} from './questions.component';
-import { ApiService } from './api.service';
-import { AuthService } from './auth.service';
 import { HomeComponent } from './home.component';
 import { NavComponent } from './nav.component';
 import { QuizComponent } from './quiz.component';
 import { QuizzesComponent } from './quizzes.component';
 import {RegisterComponent} from './register.component'
+
+import { ApiService } from './api.service';
+import { AuthService } from './auth.service';
+import { AuthInterceptor } from './auth.interceptor';
 
 
 
@@ -61,7 +64,11 @@ const routes = [
     ReactiveFormsModule
 
   ],
-  providers: [ApiService, AuthService],
+  providers: [ApiService, AuthService, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
