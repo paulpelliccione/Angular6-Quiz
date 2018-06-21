@@ -9,8 +9,17 @@ export class AuthService {
 
     register(credentials){
      this.http.post<any>(`http://localhost:61142/api/account`, credentials).subscribe(res=> {
-         localStorage.setItem('token', res)
+        this.authenticate(res)
      })
     }
+    login(credentials){
+        this.http.post<any>(`http://localhost:61142/api/login`, credentials).subscribe(res=> {
+            this.authenticate(res)
+        })
+       }
+       
+       authenticate(res) {
+        localStorage.setItem('token', res)
+       }
 
 }
