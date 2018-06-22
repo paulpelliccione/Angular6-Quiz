@@ -84,6 +84,7 @@ const routes = [
     useClass: AuthInterceptor,
     multi: true
   }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[FinishedComponent]
 })
 export class AppModule { }
