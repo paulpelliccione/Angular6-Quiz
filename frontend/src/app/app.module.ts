@@ -7,7 +7,8 @@ import {
   MatInputModule,
   MatCardModule,
   MatListModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatExpansionModule
 }
   from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
@@ -69,7 +70,8 @@ const routes = [
     MatInputModule,
     MatListModule,
     MatToolbarModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatExpansionModule
 
   ],
   providers: [ApiService, AuthService, {
