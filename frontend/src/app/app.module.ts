@@ -8,7 +8,9 @@ import {
   MatCardModule,
   MatListModule,
   MatToolbarModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatRadioModule,
+  MatDialogModule
 }
   from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
@@ -25,7 +27,7 @@ import { RegisterComponent } from './register.component'
 import { LoginComponent } from './login.component'
 import { PlayComponent } from './play.component'
 import { PlayQuizComponent } from './playQuiz.component'
-
+import { FinishedComponent } from './finished.component'
 
 import { ApiService } from './api.service';
 import { AuthService } from './auth.service';
@@ -55,7 +57,8 @@ const routes = [
     RegisterComponent,
     LoginComponent,
     PlayComponent,
-    PlayQuizComponent
+    PlayQuizComponent,
+    FinishedComponent
 
 
   ],
@@ -71,7 +74,9 @@ const routes = [
     MatListModule,
     MatToolbarModule,
     ReactiveFormsModule,
-    MatExpansionModule
+    MatExpansionModule,  
+    MatRadioModule,
+    MatDialogModule
 
   ],
   providers: [ApiService, AuthService, {
