@@ -1,4 +1,4 @@
-# Front-End Quiz Projectb "
+# Front-End Quiz Project"
 A Quiz application in Angular 6. A user can 'Register' or 'Login' once registred. The authenticated user then can resume answering quiz questions where they left off, also they can create and edit quesitons as well (Admin features still should be implemented). 
 
 ## Concepts
