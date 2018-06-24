@@ -17,4 +17,10 @@ Angular 6, Angular Material, ASP.NET Core 2.0,
 ###
 June 22, 2018&nbsp; Rouz Majlessi
 </br>
+<br/>
+This is the front end portion of the project. If you would like to clone this down and run it succesfully, You have to also get the back end portion to be able to run this application in full. 
+https://github.com/Rouz1130/Quiz-backend
+<br/>
+<br/>
+check out my portfolio
 www.rouzm.com
