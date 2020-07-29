@@ -1,0 +1,1950 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Abu Dhabi Stopover NDC XML API",
+    "version": "0.0.1",
+    "description": "Abu Dhabi Stopover NCD XML API for 3rd parties.",
+    "contact": {
+      "name": "Snowfall",
+      "url": "https://www.snowfall.se/"
+    },
+    "x-logo": {
+      "altText": "Snowfall Logo",
+      "backgroundColor": "#22BCB9",
+      "url": "logo.png"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost",
+      "description": "Development"
+    },
+    {
+      "url": "https://devapiads.southcentralus.cloudapp.azure.com",
+      "description": "Production"
+    }
+  ],
+  "x-tagGroups": [
+    {
+      "name": "Offers",
+      "tags": [
+        "offers"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "name": "offers",
+      "x-displayName": "Offers"
+    }
+  ],
+  "paths": {
+    "/apis/ndc/flights": {
+      "parameters": [],
+      "post": {
+        "summary": "",
+        "operationId": "post-apis-ndc-flights",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/IATA_AirShoppingRS"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/IATA_AirShoppingRQ"
+              },
+              "examples": {
+                "RoundTripWithStopover": {
+                  "value": "<IATA_AirShoppingRQ xmlns=\"http://www.iata.org/IATA/2015/00/2020.1/IATA_AirShoppingRQ\"><MessageDoc><Name>Etihad NDC GATEWAY</Name><RefVersionNumber>1.0</RefVersionNumber></MessageDoc><Party><Sender><TravelAgency><AgencyID>00010080</AgencyID><Name>Snowfall TECHNOLOGIES</Name><TypeCode>OnlineTravelAgency</TypeCode></TravelAgency></Sender></Party><Request><FlightRequest><OriginDestCriteria><DestArrivalCriteria><IATA_LocationCode>COK</IATA_LocationCode></DestArrivalCriteria><OriginDepCriteria><Date>2020-08-08</Date><IATA_LocationCode>DUB</IATA_LocationCode></OriginDepCriteria></OriginDestCriteria><OriginDestCriteria><DestArrivalCriteria><IATA_LocationCode>DUB</IATA_LocationCode></DestArrivalCriteria><OriginDepCriteria><Date>2020-08-18</Date><IATA_LocationCode>COK</IATA_LocationCode></OriginDepCriteria></OriginDestCriteria></FlightRequest><Paxs><Pax><PaxID>Pax1</PaxID><PTC>ADT</PTC></Pax><Pax><PaxID>Pax2</PaxID><PTC>ADT</PTC></Pax><Pax><PaxID>Pax3</PaxID><PTC>CHD</PTC></Pax></Paxs><ShoppingCriteria><CarrierCriteria><Carrier><AirlineDesigCode>EY</AirlineDesigCode></Carrier></CarrierCriteria><FlightCriteria><CabinType><CabinTypeCode>3</CabinTypeCode><CabinTypeName>Economy</CabinTypeName></CabinType></FlightCriteria></ShoppingCriteria></Request></IATA_AirShoppingRQ>"
+                }
+              }
+            }
+          },
+          "description": ""
+        },
+        "description": "NDC XML API for Outbound and inbound flights, hotels and experiences",
+        "parameters": []
+      }
+    }
+  },
+  "components": {
+    "requestBodies": {},
+    "responses": {
+      "Error": {
+        "description": "Error response.",
+        "content": {
+          "application/problem+json": {
+            "schema": {}
+          }
+        }
+      },
+      "NoContent": {
+        "description": "No Content"
+      },
+      "NotFound": {
+        "description": "Not found.",
+        "content": {
+          "application/problem+json": {
+            "schema": {}
+          }
+        }
+      }
+    },
+    "parameters": {},
+    "headers": {},
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "IATA_AirShoppingRQ": {
+        "type": "object",
+        "description": "The AirShopping transaction set supports both demanding and flexible shopping experiences for anonymous or personalized shopping. The combination of functionally-rich attribute and affinity shopping support date range or specific month (calendar) shopping as an example. The response returns offers which may include branded offers or itinerary-priced offers with or without ancillary services. It also returns applicable rules for the integrated fares as well as for each service. The message also returns multi-media content at message level as well as media references at the individual offer level.\n\n",
+        "properties": {
+          "MessageDoc": {
+            "type": "object",
+            "description": "Message document information.\n\nRefers Name and RefVersionNumber which is dummy value",
+            "properties": {
+              "Name": {
+                "type": "string",
+                "description": "Name of the MessageDoc\nImplementation Name. Example: ThisAirline Gateway\n\n",
+                "example": "00010080"
+              },
+              "RefVersionNumber": {
+                "type": "string",
+                "description": "RefVersion Number\nFramework Version. Example: SOAP 2015.1\n\n",
+                "example": "1.0"
+              }
+            }
+          },
+          "Party": {
+            "type": "object",
+            "description": "Group of Sender\nParty information. This information is intended for business use, it is not intended for transaction authentication and routing of the message.\n\n\n",
+            "properties": {
+              "Sender": {
+                "type": "object",
+                "description": "Group of TravelAgency\nInformation related to the party sending this message.\n\n",
+                "properties": {
+                  "TravelAgency": {
+                    "type": "object",
+                    "description": "Agency Manager\nA private retailer or public service that provides travel and tourism related services to the public on behalf of suppliers such as activities, airlines, car rentals, cruise lines, hotels, railways, travel insurance, and package tours.\n\n",
+                    "properties": {
+                      "AgencyID": {
+                        "type": "string",
+                        "description": "AgencyID Dummy\nUnique Agency Seller ID. Example: CTRV\n\n",
+                        "example": "00010080"
+                      },
+                      "Name": {
+                        "type": "string",
+                        "description": "Agency Name Dummy\n\nAgency name. Example: Carson Travel\n\n",
+                        "example": "Snowfall TECHNOLOGIES"
+                      },
+                      "TypeCode": {
+                        "type": "string",
+                        "description": "TypeCode dummy\nAgency type code. Examples TravelAgency, OnlineTravelAgency, or TravelManagementCompany.\n\n",
+                        "example": "OnlineTravelAgency"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Request": {
+            "type": "object",
+            "description": "Request value to the server\nAirShoppingRQ request information.\n\n",
+            "properties": {
+              "FlightRequest": {
+                "type": "object",
+                "description": "Flight Request choice of Affinity Origin Destination or Journey flight information for this shopping request.\n\n",
+                "properties": {
+                  "OriginDestCriteria": {
+                    "type": "array",
+                    "description": "The Origin and Destination airport/city pair which confines a passenger journey or an aircraft flight.\n\n",
+                    "items": {
+                      "type": "object",
+                      "minProperties": 1,
+                      "maxProperties": 2,
+                      "properties": {
+                        "OriginDepCriteria": {
+                          "type": "object",
+                          "description": "A Customer's requested Origin departure time and location.\n\n",
+                          "properties": {
+                            "Date": {
+                              "type": "string",
+                              "example": "2020-08-08",
+                              "description": "The customer's requested departure date.\n\n"
+                            },
+                            "IATA_LocationCode": {
+                              "type": "string",
+                              "description": "Origin Code\nIATA defined code identifying a city or station.\n\n\n",
+                              "example": "DUB"
+                            }
+                          }
+                        },
+                        "DestArrivalCriteria": {
+                          "type": "object",
+                          "description": "A Customer's requested Destination arrival time and location.\n\n",
+                          "properties": {
+                            "IATA_LocationCode": {
+                              "type": "string",
+                              "description": "Destination Code\nIATA defined code identifying a city or station.\n\n",
+                              "example": "COK"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "Paxs": {
+                "type": "object",
+                "description": "Passenger and Passenger Group information.\n\n",
+                "properties": {
+                  "Pax": {
+                    "type": "array",
+                    "description": "Any person except members of the crew carried or to be carried with the consent of the carrier, on board of any transport vehicle such as aircraft, train, bus, ship. Holds the attributes specific to a one booking, from shopping to fulfillment.\n\n",
+                    "items": {
+                      "type": "object",
+                      "description": "",
+                      "properties": {
+                        "PaxID": {
+                          "type": "string",
+                          "description": "Uniquely identifies a Passenger within the context of one message.\n\n",
+                          "example": "Pax1"
+                        },
+                        "PTC": {
+                          "type": "string",
+                          "example": "ADT",
+                          "description": "PTC value for every passenger\nType code applying to the Passenger which typically drives pricing (e.g. ADT, CHD, etc).\n\n"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "ShoppingCriteria": {
+                "type": "object",
+                "description": "Manage CabinType \nFurther qualifies the flight request by influencing which results are returned in the shopping response, including preferred or required criteria.\n\n",
+                "properties": {
+                  "CarrierCriteria": {
+                    "type": "object",
+                    "description": "\nDummy Value \nAirline preferences for a shopping request.\n\n",
+                    "properties": {
+                      "Carrier": {
+                        "type": "object",
+                        "description": "Dummy Value \nThe organization which carries the passenger, baggage, or goods, and/or commits to delivering the carriage as well as any related services such as issuance of ticket, creation of Order, etc.\n\n",
+                        "properties": {
+                          "AirlineDesigCode": {
+                            "type": "string",
+                            "example": "EY",
+                            "description": "Dummy Value \nAirline code assigned to a carrier. Either ICAO-defined 3-character code or IATA-defined 2-character code.\n\n"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "FlightCriteria": {
+                    "type": "object",
+                    "description": "Flight filter criteria including aircraft features, Cabin Type, RBD, and Tail Number.\n\n",
+                    "properties": {
+                      "CabinType": {
+                        "type": "object",
+                        "description": "Type of compartment of an aircraft, offering specific services (e.g. business class, economy).\n\n",
+                        "properties": {
+                          "CabinTypeCode": {
+                            "type": "string",
+                            "example": "Y",
+                            "description": "Cabin Type Code as defined by PADIS codeset (e.g. 1, 2, 3, etc.)\n\n"
+                          },
+                          "CabinTypeName": {
+                            "type": "string",
+                            "example": "Economy",
+                            "description": "Name given to a cabin compartment (e.g. Business, First, Economy).\n\n"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "IATA_AirShoppingRS": {
+        "title": "Flights response",
+        "type": "object",
+        "properties": {
+          "IATA_AirShoppingRS": {
+            "type": "object",
+            "description": "The AirShopping transaction set supports both demanding and flexible shopping experiences for anonymous or personalized shopping. The combination of functionally-rich attribute and affinity shopping support date range or specific month (calendar) shopping as an example. The response returns offers which may include branded offers or itinerary-priced offers with or without ancillary services. It also returns applicable rules for the integrated fares as well as for each service. The message also returns multi-media content at message level as well as media references at the individual offer level.\n\n",
+            "properties": {
+              "Response": {
+                "type": "object",
+                "description": "AirShopping response information.\n\n",
+                "properties": {
+                  "DataLists": {
+                    "type": "object",
+                    "description": "Data List definition for this message.\n\n",
+                    "properties": {
+                      "OriginDestList": {
+                        "type": "object",
+                        "description": "Origin Destination data list definition.\n\n",
+                        "properties": {
+                          "OriginDest": {
+                            "type": "array",
+                            "minItems": 1,
+                            "maxItems": 2,
+                            "description": "The Origin and Destination airport/city pair which confines a passenger journey or an aircraft flight.\n\n",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "DestCode": {
+                                  "type": "string",
+                                  "description": "IATA defined code identifying a city or station.\n\n",
+                                  "example": "COK"
+                                },
+                                "OriginCode": {
+                                  "type": "string",
+                                  "description": "IATA defined code identifying a city or station.\n\n",
+                                  "example": "DUB"
+                                },
+                                "OriginDestID": {
+                                  "type": "string",
+                                  "description": "Uniquely identifies an Origin Destination within the context of one message.\n\n",
+                                  "example": "DUBCOK"
+                                },
+                                "PaxJourneyRefID": {
+                                  "type": "array",
+                                  "description": "Uniquely identifies a Passenger Journey within the context of one message.\n\n",
+                                  "items": {
+                                    "type": "string",
+                                    "example": "FL_DUBCOK"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "PaxJourneyList": {
+                        "type": "object",
+                        "description": "Journey data list definition.\n\n",
+                        "properties": {
+                          "PaxJourney": {
+                            "type": "array",
+                            "minItems": 1,
+                            "maxItems": 2,
+                            "description": "A collection of segments which satisfies transportation of a passenger for a given origin and destination.\n\n",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "Duration": {
+                                  "type": "string",
+                                  "description": "Total journey time including the combined air time and connection times. In case of stopover, this may or may not include stopover durations.\n\n",
+                                  "example": "PT15H35M"
+                                },
+                                "PaxJourneyID": {
+                                  "type": "string",
+                                  "description": "Uniquely identifies a Passenger Journey within the context of one message.\n\n",
+                                  "example": "FL_DUBCOK"
+                                },
+                                "PaxSegmentRefID": {
+                                  "type": "array",
+                                  "description": "Reference to a Passenger Segment ID within this message.\n\n",
+                                  "items": {
+                                    "type": "string",
+                                    "enum": [
+                                      "SEG_DUBAUH_2",
+                                      "SEG_AUHCOK_3"
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "PaxList": {
+                        "type": "object",
+                        "description": "Passenger data list definition.\n\n",
+                        "properties": {
+                          "Pax": {
+                            "type": "array",
+                            "description": "Any person except members of the crew carried or to be carried with the consent of the carrier, on board of any transport vehicle such as aircraft, train, bus, ship. Holds the attributes specific to a one booking, from shopping to fulfillment.\n\n",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "PaxID": {
+                                  "type": "string",
+                                  "description": "Uniquely identifies a Passenger within the context of one message.\n\n",
+                                  "example": "Pax1"
+                                },
+                                "PTC": {
+                                  "type": "string",
+                                  "description": "Type code applying to the Passenger which typically drives pricing (e.g. ADT, CHD, etc).\n\n",
+                                  "example": "ADT"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "PaxSegmentList": {
+                        "type": "object",
+                        "description": "Segment data list definition.\n\n",
+                        "properties": {
+                          "PaxSegment": {
+                            "type": "array",
+                            "description": "Transportation of a passenger on a Dated Operating Segment.\n\n",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "Arrival": {
+                                  "type": "object",
+                                  "description": "The action or process of arriving of a transport vehicle in any place or location.\n\n",
+                                  "properties": {
+                                    "AircraftScheduledDateTime": {
+                                      "type": "string",
+                                      "description": "The Scheduled Date and Time of Arrival of the aircraft at the terminal or departure gate at an airport.\n\n",
+                                      "example": "2020-08-09T00:15:00"
+                                    },
+                                    "IATA_LocationCode": {
+                                      "type": "string",
+                                      "description": "IATA defined code identifying a city or station.\n\n",
+                                      "example": "AUH"
+                                    },
+                                    "TerminalName": {
+                                      "type": "string",
+                                      "description": "The name of the terminal.\n\n",
+                                      "example": "3"
+                                    }
+                                  }
+                                },
+                                "CabinType": {
+                                  "type": "object",
+                                  "description": "Type of compartment of an aircraft, offering specific services (e.g. business class, economy).\n\n",
+                                  "properties": {
+                                    "CabinTypeCode": {
+                                      "type": "string",
+                                      "description": "Cabin Type Code as defined by PADIS codeset (e.g. 1, 2, 3, etc.)\n\n",
+                                      "example": "Y"
+                                    },
+                                    "CabinTypeName": {
+                                      "type": "string",
+                                      "description": "Name given to a cabin compartment (e.g. Business, First, Economy).\n\n",
+                                      "example": "Economy"
+                                    }
+                                  }
+                                },
+                                "DatedOperatingLeg": {
+                                  "type": "object",
+                                  "description": "The nonstop operation of a transport vehicle between the departure station and the arrival station. Can be used for aircrafts as well as other transport vehicles such as train or bus etc.\n\n",
+                                  "properties": {
+                                    "Arrival": {
+                                      "type": "object",
+                                      "description": "The action or process of arriving of a transport vehicle in any place or location.\n\n",
+                                      "properties": {
+                                        "AircraftScheduledDateTime": {
+                                          "type": "string",
+                                          "description": "The Scheduled Date and Time of Arrival of the aircraft at the terminal or departure gate at an airport.\n\n",
+                                          "example": "2020-08-09T00:15:00"
+                                        },
+                                        "IATA_LocationCode": {
+                                          "type": "string",
+                                          "description": "IATA defined code identifying a city or station.\n\n",
+                                          "example": "AUH"
+                                        },
+                                        "TerminalName": {
+                                          "type": "string",
+                                          "description": "The name of the terminal.\n\n",
+                                          "example": "3"
+                                        }
+                                      }
+                                    },
+                                    "CarrierAircraftType": {
+                                      "type": "object",
+                                      "description": "Carrier defined internal grouping of aircrafts with the same form, function and specification.\n\n",
+                                      "properties": {
+                                        "CarrierAircraftTypeCode": {
+                                          "type": "string",
+                                          "description": "Internal code used by an carrier to identify the type of aircraft.\n\n",
+                                          "example": "789"
+                                        },
+                                        "CarrierAircraftTypeName": {
+                                          "type": "string",
+                                          "description": "Internal name given by the carrier to this aircraft type.\n\n",
+                                          "example": "789"
+                                        }
+                                      }
+                                    },
+                                    "DatedOperatingLegID": {
+                                      "type": "string",
+                                      "description": "Uniquely identifies a leg within the context of one message.\n\n",
+                                      "example": "DatedOperatingLeg_7"
+                                    },
+                                    "Dep": {
+                                      "type": "object",
+                                      "description": "The action or process of leaving of a transport vehicle from any place or location.\n\n",
+                                      "properties": {
+                                        "AircraftScheduledDateTime": {
+                                          "type": "string",
+                                          "description": "The Scheduled Date and Time of Departure of the aircraft at the terminal or departure gate at an airport.\n\n",
+                                          "example": "2020-08-08T13:45:00"
+                                        },
+                                        "IATA_LocationCode": {
+                                          "type": "string",
+                                          "description": "IATA defined code identifying a city or station.\n\n",
+                                          "example": "DUB"
+                                        },
+                                        "TerminalName": {
+                                          "type": "string",
+                                          "description": "The name of the terminal.\n\n",
+                                          "example": "1"
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "Dep": {
+                                  "type": "object",
+                                  "description": "The action or process of leaving of a transport vehicle from any place or location.\n\n",
+                                  "properties": {
+                                    "AircraftScheduledDateTime": {
+                                      "type": "string",
+                                      "description": "The Scheduled Date and Time of Departure of the aircraft at the terminal or departure gate at an airport.\n\n",
+                                      "example": "2020-08-08T13:45:00"
+                                    },
+                                    "IATA_LocationCode": {
+                                      "type": "string",
+                                      "description": "IATA defined code identifying a city or station.\n\n",
+                                      "example": "DUB"
+                                    },
+                                    "TerminalName": {
+                                      "type": "string",
+                                      "description": "The name of the terminal.\n\n",
+                                      "example": "1"
+                                    }
+                                  }
+                                },
+                                "Duration": {
+                                  "type": "string",
+                                  "description": "Total segment time including the combined air time and connection times of any legs.\n\n",
+                                  "example": "PT06H35M"
+                                },
+                                "MarketingCarrierInfo": {
+                                  "type": "object",
+                                  "description": "The commercial designation under which a Dated Operating Segment can be booked, either under the operating carrier's designator or that of another carrier (codeshare).\n\n",
+                                  "properties": {
+                                    "CarrierDesigCode": {
+                                      "type": "string",
+                                      "description": "Airline code assigned to a carrier. Either ICAO-defined 3-character code or IATA-defined 2-character code.\n\n",
+                                      "example": "EY"
+                                    },
+                                    "CarrierName": {
+                                      "type": "string",
+                                      "description": "Commercial name of the carrier.\n\n",
+                                      "example": "321"
+                                    },
+                                    "MarketingCarrierFlightNumberText": {
+                                      "type": "string",
+                                      "description": "The numerical designation of a flight as it is marketed by a carrier.\n\n",
+                                      "example": "246"
+                                    }
+                                  }
+                                },
+                                "OperatingCarrierInfo": {
+                                  "type": "object",
+                                  "description": "An operation between board point and any subsequent off point within the same flight designator. Could be one or more legs. Could also be used for other transport vehicles such as train or bus etc.\n\n",
+                                  "properties": {
+                                    "CarrierDesigCode": {
+                                      "type": "string",
+                                      "description": "Airline code assigned to a carrier. Either ICAO-defined 3-character code or IATA-defined 2-character code.\n\n",
+                                      "example": "E"
+                                    },
+                                    "CarrierName": {
+                                      "type": "string",
+                                      "description": "Commercial name of the carrier.\n\n",
+                                      "example": "321"
+                                    },
+                                    "OperatingCarrierFlightNumberText": {
+                                      "type": "string",
+                                      "description": "The numerical designation of a flight as it is operated by a carrier.\n\n",
+                                      "example": "246"
+                                    }
+                                  }
+                                },
+                                "PaxSegmentID": {
+                                  "type": "string",
+                                  "description": "Uniquely identifies a Passenger Segment within the context of one message.\n\n",
+                                  "example": "SEG_AUHCOK_3"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "PriceClassList": {
+                        "type": "object",
+                        "description": "Price Class data list definition.\n\n",
+                        "properties": {
+                          "PriceClass": {
+                            "type": "array",
+                            "description": "A price point within a particular Cabin Type (sometimes referred to as 'Fare Families').\n\n",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "Code": {
+                                  "type": "string",
+                                  "description": "Price class code. Example: 1, ABC\n\n",
+                                  "example": "124699"
+                                },
+                                "Desc": {
+                                  "type": "array",
+                                  "description": "An account or representation of the certain or major aspects, characteristics, or features of a person, object, or event .\n\n",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "DescText": {
+                                        "type": "string",
+                                        "description": "Description text value.\n\n",
+                                        "example": ">-Not eligible for priority check-in, lounge access and chauffeur service"
+                                      }
+                                    }
+                                  }
+                                },
+                                "Name": {
+                                  "type": "string",
+                                  "description": "Price class name. Example: SUPERSAVER\n\n",
+                                  "example": "Economy Classic"
+                                },
+                                "PriceClassID": {
+                                  "type": "string",
+                                  "description": "Uniquely Identifies a Price Class within the context of one message.\n\n",
+                                  "example": "YV"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "ServiceDefinitionList": {
+                        "type": "object",
+                        "description": "Dummy value for validation \nService Definition data list definition.\n\n",
+                        "properties": {
+                          "ServiceDefinition": {
+                            "type": "object",
+                            "description": "Description and characteristics of a non-flight product or service that can be separately sold and delivered. E.g. bag, seat, meal on a flight.\n\n",
+                            "properties": {
+                              "BookingInstructions": {
+                                "type": "object",
+                                "description": "Optional service booking instructions to include SSR, OSI and upgrade Method.\n\n",
+                                "properties": {
+                                  "MethodText": {
+                                    "type": "string",
+                                    "description": "PNR booking method. Example: AE (BY SSR - SPECIAL SERVICE REQUEST) For maximum interoperability, refer to IATA PADIS Code List for data element 9750. Select a code value or enter a value that is bilaterally agreed upon between trading partners.\n\n",
+                                    "example": "BookingInstructions"
+                                  }
+                                }
+                              },
+                              "Desc": {
+                                "type": "object",
+                                "description": "An account or representation of the certain or major aspects, characteristics, or features of a person, object, or event .\n\n",
+                                "properties": {
+                                  "DescText": {
+                                    "type": "string",
+                                    "description": "Description text value.\n\n",
+                                    "example": "- Earn 100% Etihad Guest Miles"
+                                  }
+                                }
+                              },
+                              "Name": {
+                                "type": "string",
+                                "description": "Service name. Example: Lounge Pass\n\n",
+                                "example": "Service1"
+                              },
+                              "ServiceDefinitionID": {
+                                "type": "string",
+                                "description": "Uniquely Identifies a Service Definition within the context of one message.\n\n",
+                                "example": "Service1"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "OffersGroup": {
+                    "type": "object",
+                    "description": "Offers grouped by Carrier.\n\n",
+                    "properties": {
+                      "AllOffersSummary": {
+                        "type": "object",
+                        "description": "Offer summary that includes highest, lowest, and number of matched offers included in the response.\n\n",
+                        "properties": {
+                          "MatchedOfferQty": {
+                            "type": "integer",
+                            "description": "Count of offers",
+                            "example": 9
+                          }
+                        }
+                      },
+                      "CarrierOffers": {
+                        "type": "object",
+                        "description": "Grouping of Offers returned by a single ORA.\n\n",
+                        "properties": {
+                          "CarrierOffersSummary": {
+                            "type": "object",
+                            "description": "Offer summary that includes highest, lowest, and number of matched offers included in the response.\n\n",
+                            "properties": {
+                              "HighestOfferPrice": {
+                                "type": "object",
+                                "description": "The amount of money expected, required, or given in payment for something .\n\n",
+                                "properties": {
+                                  "TotalAmount": {
+                                    "type": "number",
+                                    "description": "Total Amount",
+                                    "example": 629.31
+                                  }
+                                }
+                              },
+                              "LowestOfferPrice": {
+                                "type": "object",
+                                "description": "The amount of money expected, required, or given in payment for something .\n\n",
+                                "properties": {
+                                  "TotalAmount": {
+                                    "type": "number",
+                                    "description": "Total Amount",
+                                    "example": 629.31
+                                  }
+                                }
+                              },
+                              "MatchedOfferQty": {
+                                "type": "integer",
+                                "description": "Count of offers",
+                                "example": 1
+                              }
+                            }
+                          },
+                          "Offer": {
+                            "type": "array",
+                            "description": "A proposal to sell a specific set of products or Services under specific conditions, for a certain price. Can be the response to a shopping request.\n\n",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "JourneyOverview": {
+                                  "type": "object",
+                                  "description": "Summary of proposed Journey information in the context of this specific Offer.\n\n",
+                                  "properties": {
+                                    "JourneyPriceClass": {
+                                      "type": "array",
+                                      "description": "Price class information per Journey.\n\n",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "PaxJourneyRefID": {
+                                            "type": "string",
+                                            "description": "Reference to a Passenger Journey within the context of this message.\n\n",
+                                            "example": "FL_DUBCOK"
+                                          },
+                                          "PriceClassRefID": {
+                                            "type": "string",
+                                            "description": "Itinerary level Price Class ref\n\n",
+                                            "example": "YV"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "OfferID": {
+                                  "type": "string",
+                                  "description": "Carrier assigned ID which uniquely identifies a specific Offer across several messages.\n\n",
+                                  "example": "OFFER1495619793"
+                                },
+                                "OfferItem": {
+                                  "type": "object",
+                                  "description": "A priced grouping of one or more services within an Offer.\n\n",
+                                  "properties": {
+                                    "FareDetail": {
+                                      "type": "array",
+                                      "description": "The amount charged by the carrier for the carriage of a passenger and his allowable free baggage.\n\n",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "FareComponent": {
+                                            "type": "object",
+                                            "description": "A portion of an itinerary between two consecutive fare construction points. If the journey has only one fare component, the points of origin and destination are the only fare construction points\n\n",
+                                            "properties": {
+                                              "CabinType": {
+                                                "type": "object",
+                                                "description": "Type of compartment of an aircraft, offering specific services (e.g. business class, economy).\n\n",
+                                                "properties": {
+                                                  "CabinTypeCode": {
+                                                    "type": "string",
+                                                    "description": "Cabin Type Code as defined by PADIS codeset (e.g. 1, 2, 3, etc.)\n\n",
+                                                    "example": "Y"
+                                                  },
+                                                  "CabinTypeName": {
+                                                    "type": "string",
+                                                    "description": "Name given to a cabin compartment (e.g. Business, First, Economy).\n\n",
+                                                    "example": "Economy"
+                                                  }
+                                                }
+                                              },
+                                              "FareBasisCode": {
+                                                "type": "string",
+                                                "description": "Fare basis code. Example: Y26\n\n",
+                                                "example": "LKAPRTIE/YV"
+                                              },
+                                              "FareTypeCode": {
+                                                "type": "string",
+                                                "description": "Fare Amount Type Code, ex: ADC (Additional Charge), IT (Tour Inclusive), NOADC (No additional charge).\n\n",
+                                                "example": "PUBLISHED"
+                                              },
+                                              "PaxSegmentRefID": {
+                                                "type": "array",
+                                                "description": "Reference to a Pax Segment ID.\n\n",
+                                                "items": {
+                                                  "type": "string",
+                                                  "example": "SEG_DUBAUH_2"
+                                                }
+                                              },
+                                              "PriceClassRefID": {
+                                                "type": "string",
+                                                "description": "A price point within a particular Cabin Type (sometimes referred to as 'Fare Families').\n\n",
+                                                "example": "YV"
+                                              },
+                                              "RBD": {
+                                                "type": "object",
+                                                "description": "Reservation Booking Designator. A categorization used to facilitate access to inventory, application of filed fares, and to identify cabin entitlement. Identified using a single alpha character. E.g. 'J' for Business Class Premium, 'D' for Business Discounted.\n\n",
+                                                "properties": {
+                                                  "RBD_Code": {
+                                                    "type": "string",
+                                                    "description": "Code used to identify a particular RBD (e.g. P, J, W, M, etc.).\n\n",
+                                                    "example": "L"
+                                                  }
+                                                }
+                                              },
+                                              "TicketDesigCode": {
+                                                "type": "string",
+                                                "description": "The Fare Basis Code Designator shall be placed within this element and removed from the Fare Basis Code element. For example, if the Airline has a fare basis code with a designator like 'JFBC/WO'. The Fare basis Code element should contain 'JFBC' and this element should contain'WO'.\n\n",
+                                                "example": "YV"
+                                              }
+                                            }
+                                          },
+                                          "FarePriceType": {
+                                            "type": "object",
+                                            "description": "The type of fair price applied to a Fare Detail (e.g. filed amount, net amount, or a sell amount).\n\n",
+                                            "properties": {
+                                              "FarePriceTypeCode": {
+                                                "type": "string",
+                                                "description": "Indicates if the fare price provided is a filed amount, net amount, or a sell amount.\n\n",
+                                                "example": "0"
+                                              },
+                                              "Price": {
+                                                "type": "object",
+                                                "description": "The amount of money expected, required, or given in payment for something .\n\n",
+                                                "properties": {
+                                                  "BaseAmount": {
+                                                    "type": "number",
+                                                    "description": "Total Base Fare Amount. Example: 200000\n\n",
+                                                    "example": 329
+                                                  },
+                                                  "TaxSummary": {
+                                                    "type": "object",
+                                                    "description": "Tax summary information.\n\n",
+                                                    "properties": {
+                                                      "TotalTaxAmount": {
+                                                        "type": "number",
+                                                        "description": "Total of all applicable tax amounts included in the price. If tax breakdowns are provided, this amount should match the sum of the tax breakdown amounts.\n\n",
+                                                        "example": 212.31
+                                                      }
+                                                    }
+                                                  },
+                                                  "TotalAmount": {
+                                                    "type": "number",
+                                                    "description": "Total monetary price amount, including all tax, surcharge, and fee amounts.\n\n",
+                                                    "example": 541.31
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          },
+                                          "PaxRefID": {
+                                            "type": "array",
+                                            "description": "Reference to a Passenger ID\n\n",
+                                            "items": {
+                                              "type": "string",
+                                              "example": "Pax1"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "OfferItemID": {
+                                      "type": "string",
+                                      "description": "Carrier assigned ID which exists uniquely within an Offer.\n\n",
+                                      "example": "OFFER1495619793"
+                                    },
+                                    "OfferItemPaymentTimeLimit": {
+                                      "type": "object",
+                                      "description": "Offfer item payment time limit\n\n",
+                                      "properties": {
+                                        "PaymentTimeLimitDate": {
+                                          "type": "object",
+                                          "description": "Payment Limit Date",
+                                          "properties": {
+                                            "PaymentTimeLimitDateTime": {
+                                              "type": "string",
+                                              "example": "2050-08-11T23:29:41.543+03:00",
+                                              "description": "Payment Limit Date Time"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "Price": {
+                                      "type": "object",
+                                      "description": "The amount of money expected, required, or given in payment for something .\n\n",
+                                      "properties": {
+                                        "BaseAmount": {
+                                          "type": "string",
+                                          "description": "Total Base Fare Amount. Example: 200000\n\n",
+                                          "example": "329.0"
+                                        },
+                                        "TaxSummary": {
+                                          "type": "object",
+                                          "description": "Tax summary information.\n\n",
+                                          "properties": {
+                                            "TotalTaxAmount": {
+                                              "type": "string",
+                                              "description": "Total of all applicable tax amounts included in the price. If tax breakdowns are provided, this amount should match the sum of the tax breakdown amounts.\n\n",
+                                              "example": "212.31"
+                                            }
+                                          }
+                                        },
+                                        "TotalAmount": {
+                                          "type": "string",
+                                          "description": "Total monetary price amount, including all tax, surcharge, and fee amounts.\n\n",
+                                          "example": "541.31"
+                                        }
+                                      }
+                                    },
+                                    "Service": {
+                                      "type": "object",
+                                      "description": "The instance of a specific flight or Service Definition as it has been offered (and eventually ordered and consumed) in the context of a specific Offer and/or Order.\n\n",
+                                      "properties": {
+                                        "PaxRefID": {
+                                          "type": "array",
+                                          "description": "Reference to a Passenger ID within this message, associating an infant on lap to this adult Passenger.\n\n",
+                                          "items": {
+                                            "type": "string",
+                                            "example": "Pax1"
+                                          }
+                                        },
+                                        "ServiceAssociations": {
+                                          "type": "object",
+                                          "description": "Service Associations Choice\n\n",
+                                          "properties": {
+                                            "ServiceDefinitionRef": {
+                                              "type": "object",
+                                              "description": "Airline specific definition of a product or service (excluding flights) that can be separately sold and delivered. e.g. bag, seat, meal on a flight\n\n",
+                                              "properties": {
+                                                "PaxSegmentRefID": {
+                                                  "type": "array",
+                                                  "description": "References a Passenger Segment ID within this message.\n\n",
+                                                  "items": {
+                                                    "type": "string",
+                                                    "example": "SEG_DUBAUH_2"
+                                                  }
+                                                },
+                                                "ServiceDefinitionFlightAssociations": {
+                                                  "type": "object",
+                                                  "description": "Service Definition Flight Associations\n\n",
+                                                  "properties": {
+                                                    "DatedOperatingLegRef": {
+                                                      "type": "object",
+                                                      "description": "Eligiibility of this offer item to the following segments or journeys.\n\n",
+                                                      "properties": {
+                                                        "DatedOperatingLegRefID": {
+                                                          "type": "string",
+                                                          "description": "Reference to the Dated Operating Legs.\n\nJust a dummy value",
+                                                          "example": "DatedOperatingLeg_7"
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                },
+                                                "ServiceDefinitionRefID": {
+                                                  "type": "string",
+                                                  "description": "References a Service Definition ID within this message.\n\n",
+                                                  "example": "Service1"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        },
+                                        "ServiceID": {
+                                          "type": "string",
+                                          "description": "Here, we set this value to HotelOfferID + ExperienceOfferID to indicate the unique hotel offer and experience offer\n\nUniquely Identifies a Service within the context of one message.\n\n",
+                                          "example": "Hot3663 Exp22292"
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "OwnerCode": {
+                                  "type": "string",
+                                  "description": "Airline code assigned to a carrier. Either ICAO-defined 3-character code or IATA-defined 2-character code.\n\n",
+                                  "example": "EY"
+                                },
+                                "TotalPrice": {
+                                  "type": "object",
+                                  "description": "The amount of money expected, required, or given in payment for something .\n\n",
+                                  "properties": {
+                                    "BaseAmount": {
+                                      "type": "number",
+                                      "description": "Total Base Fare Amount. Example: 200000\n\n",
+                                      "example": 417
+                                    },
+                                    "TaxSummary": {
+                                      "type": "object",
+                                      "description": "Tax summary information.\n\n",
+                                      "properties": {
+                                        "TotalTaxAmount": {
+                                          "type": "number",
+                                          "description": "Total of all applicable tax amounts included in the price. If tax breakdowns are provided, this amount should match the sum of the tax breakdown amounts.\n\n",
+                                          "example": 212.31
+                                        }
+                                      }
+                                    },
+                                    "TotalAmount": {
+                                      "type": "number",
+                                      "description": "Total monetary price amount, including all tax, surcharge, and fee amounts.\n\n",
+                                      "example": 629.31
+                                    }
+                                  }
+                                },
+                                "ValidatingCarrierCode": {
+                                  "type": "string",
+                                  "description": "Airline code assigned to a carrier. Either ICAO-defined 3-character code or IATA-defined 2-character code.\n\n",
+                                  "example": "EY"
+                                }
+                              }
+                            }
+                          },
+                          "PriceCalendar": {
+                            "type": "array",
+                            "description": "Calendar based Flight Price. This capability supports multi-day calendar shopping, e.g. returning priced flight offers for a specified period before and/or after the actual requested date.\n\n",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "LeadPriceInd": {
+                                  "type": "string",
+                                  "example": "true",
+                                  "description": "When true, this is a lead calendar shopping price for a date that is prior to or after the required travel date.\n\n"
+                                },
+                                "PriceCalendarDate": {
+                                  "type": "object",
+                                  "description": "Price Calendar Date\n\n",
+                                  "properties": {
+                                    "Date": {
+                                      "type": "string",
+                                      "description": "Date",
+                                      "example": "2020-08-08"
+                                    },
+                                    "OriginDestRefID": {
+                                      "type": "string",
+                                      "description": "Association to one Origin/Destination instance. Example: od1\n\n",
+                                      "example": "DUBCOK"
+                                    }
+                                  }
+                                },
+                                "TotalPriceAmount": {
+                                  "type": "string",
+                                  "description": "The total Offer price for all passengers associated with the specified Origin Destination and Date.\n\n",
+                                  "example": 629.31
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "ShoppingResponse": {
+                    "type": "object",
+                    "description": "Facilitates the tracking of what was Offered and contains an identifier unique to the source Airline for a set of product Offers returned in response to a shopping request.\n\n",
+                    "properties": {
+                      "ShoppingResponseRefID": {
+                        "type": "string",
+                        "description": "Reference to unique shopping session response ID, as provided in the airline's previous shopping response.\n\n",
+                        "example": "tx--420062eb-155e-47d1-b797-0cb3fc8e9df2_35200056"
+                      }
+                    }
+                  }
+                }
+              },
+              "AugmentationPoint": {
+                "type": "object",
+                "description": "AugmentationPoint\n\n",
+                "properties": {
+                  "ExperienceList": {
+                    "type": "object",
+                    "properties": {
+                      "Experience": {
+                        "type": "array",
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "Availabilities": {
+                                "type": "object",
+                                "properties": {
+                                  "Items": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "AvailabilityActive": {
+                                          "type": "string",
+                                          "example": "True"
+                                        },
+                                        "AvailabilityCapacityId": {
+                                          "type": "string"
+                                        },
+                                        "AvailabilityCreated": {
+                                          "type": "string",
+                                          "example": "2020-07-21T13:40:09+00:00"
+                                        },
+                                        "AvailabilityFromDateTime": {
+                                          "type": "string",
+                                          "example": "2020-08-09T05:45:00+02:00"
+                                        },
+                                        "AvailabilityId": {
+                                          "type": "string"
+                                        },
+                                        "AvailabilityModified": {
+                                          "type": "string",
+                                          "example": "2020-07-21T13:40:09+00:00"
+                                        },
+                                        "AvailabilityProductId": {
+                                          "type": "string"
+                                        },
+                                        "AvailabilitySpots": {
+                                          "type": "object",
+                                          "properties": {
+                                            "AvailabilitySpotsOpen": {
+                                              "type": "integer"
+                                            },
+                                            "AvailabilitySpotsTotal": {
+                                              "type": "integer"
+                                            }
+                                          }
+                                        },
+                                        "AvailabilityToDateTime": {
+                                          "type": "string",
+                                          "example": "2020-08-09T05:45:00+02:00"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "TotalItems": {
+                                    "type": "integer"
+                                  }
+                                }
+                              },
+                              "ExperienceOfferId": {
+                                "type": "string"
+                              },
+                              "Product": {
+                                "type": "object",
+                                "properties": {
+                                  "OfferedEtihadDiscounts": {
+                                    "type": "object",
+                                    "properties": {
+                                      "DiscountAmountOrPct": {
+                                        "type": "number"
+                                      },
+                                      "DiscountType": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  },
+                                  "ProductAdmissionType": {
+                                    "type": "string"
+                                  },
+                                  "ProductAvailability": {
+                                    "type": "string",
+                                    "example": "True"
+                                  },
+                                  "ProductBookingAdvanceTimeMin": {
+                                    "type": "integer"
+                                  },
+                                  "ProductBookingQuantityMax": {
+                                    "type": "integer"
+                                  },
+                                  "ProductBookingQuantityMin": {
+                                    "type": "integer"
+                                  },
+                                  "ProductBookingStartDate": {
+                                    "type": "string",
+                                    "example": "2020-06-24T00:00:00+01:00"
+                                  },
+                                  "ProductCancellationAllowed": {
+                                    "type": "string",
+                                    "example": "True"
+                                  },
+                                  "ProductCancellationPolicies": {
+                                    "type": "object",
+                                    "properties": {
+                                      "CancellationDescription": {
+                                        "type": "string"
+                                      },
+                                      "CancellationFeeThreshold": {
+                                        "type": "number"
+                                      },
+                                      "CancellationType": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  },
+                                  "ProductCapacity": {
+                                    "type": "string",
+                                    "example": "True"
+                                  },
+                                  "ProductCapacityType": {
+                                    "type": "string"
+                                  },
+                                  "ProductCategories": {
+                                    "type": "string"
+                                  },
+                                  "ProductCodeSettings": {
+                                    "type": "object",
+                                    "properties": {
+                                      "ProductCodeFormat": {
+                                        "type": "string"
+                                      },
+                                      "ProductCodeSource": {
+                                        "type": "string"
+                                      },
+                                      "ProductVoucherSettings": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  },
+                                  "ProductContent": {
+                                    "type": "object",
+                                    "properties": {
+                                      "ProductAdditionalInformation": {
+                                        "type": "string"
+                                      },
+                                      "ProductDurationText": {
+                                        "type": "string"
+                                      },
+                                      "ProductEntryNotes": {
+                                        "type": "string"
+                                      },
+                                      "ProductExcludes": {
+                                        "type": "object",
+                                        "properties": {
+                                          "ExcludeDescription": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      },
+                                      "ProductHighlights": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "HighlightDescription": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "ProductImages": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "ImageType": {
+                                              "type": "string"
+                                            },
+                                            "ImageUrl": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "ProductIncludes": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "IncludeDescription": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "ProductLongDescription": {
+                                        "type": "string"
+                                      },
+                                      "ProductShortDescription": {
+                                        "type": "string"
+                                      },
+                                      "ProductSupplierName": {
+                                        "type": "string"
+                                      },
+                                      "ProductTitle": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  },
+                                  "ProductContentLanguages": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "ProductCreated": {
+                                    "type": "string",
+                                    "example": "2020-06-24T12:26:24+01:00"
+                                  },
+                                  "ProductDefaultLanguage": {
+                                    "type": "string"
+                                  },
+                                  "ProductDistributorId": {
+                                    "type": "string"
+                                  },
+                                  "ProductDistributorName": {
+                                    "type": "string"
+                                  },
+                                  "ProductDuration": {
+                                    "type": "integer",
+                                    "example": 120
+                                  },
+                                  "ProductEndDate": {
+                                    "type": "string",
+                                    "example": "2020-09-30T23:59:00+01:00"
+                                  },
+                                  "ProductFromPrice": {
+                                    "type": "number"
+                                  },
+                                  "ProductId": {
+                                    "type": "string"
+                                  },
+                                  "ProductLanguages": {
+                                    "type": "string"
+                                  },
+                                  "ProductLocations": {
+                                    "type": "object",
+                                    "properties": {
+                                      "LocationAddress": {
+                                        "type": "object",
+                                        "properties": {
+                                          "Country": {
+                                            "type": "string"
+                                          },
+                                          "CountryCode": {
+                                            "type": "string"
+                                          },
+                                          "Latitude": {
+                                            "type": "string"
+                                          },
+                                          "Longitude": {
+                                            "type": "string"
+                                          },
+                                          "Name": {
+                                            "type": "string"
+                                          },
+                                          "Notes": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      },
+                                      "LocationDescription": {
+                                        "type": "string"
+                                      },
+                                      "LocationId": {
+                                        "type": "string"
+                                      },
+                                      "LocationName": {
+                                        "type": "string"
+                                      },
+                                      "LocationType": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  },
+                                  "ProductModified": {
+                                    "type": "string"
+                                  },
+                                  "ProductNoshowPolicy": {
+                                    "type": "object",
+                                    "properties": {
+                                      "FeePercentage": {
+                                        "type": "number"
+                                      }
+                                    }
+                                  },
+                                  "ProductPastDateBookingAllowed": {
+                                    "type": "string",
+                                    "example": "True"
+                                  },
+                                  "ProductPaymentDetail": {
+                                    "type": "object",
+                                    "properties": {
+                                      "ProductPaymentCurrency": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "CurrencyCode": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "ProductPickupPoint": {
+                                    "type": "string"
+                                  },
+                                  "ProductRedemptionRules": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "RedemptionCountType": {
+                                          "type": "string"
+                                        },
+                                        "RedemptionCountValue": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "RedemptionCountValue": {
+                                    "type": "string"
+                                  },
+                                  "ProductStartDate": {
+                                    "type": "string",
+                                    "example": "2020-06-24T00:00:00+01:00"
+                                  },
+                                  "ProductSupplierId": {
+                                    "type": "string"
+                                  },
+                                  "ProductTypeSeasons": {
+                                    "type": "object",
+                                    "properties": {
+                                      "ProductTypeSeasonDetails": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "ProductType": {
+                                              "type": "string"
+                                            },
+                                            "ProductTypeAgeFrom": {
+                                              "type": "integer"
+                                            },
+                                            "ProductTypeAgeTo": {
+                                              "type": "integer"
+                                            },
+                                            "ProductTypeId": {
+                                              "type": "string"
+                                            },
+                                            "ProductTypeLabel": {
+                                              "type": "string"
+                                            },
+                                            "ProductTypePax": {
+                                              "type": "string"
+                                            },
+                                            "ProductTypePriceTaxId": {
+                                              "type": "string"
+                                            },
+                                            "ProductTypePriceType": {
+                                              "type": "string"
+                                            },
+                                            "ProductTypePricing": {
+                                              "type": "object",
+                                              "properties": {
+                                                "ProductTypeDiscount": {
+                                                  "type": "number"
+                                                },
+                                                "ProductTypeListPrice": {
+                                                  "type": "number"
+                                                },
+                                                "ProductTypeResalePrice": {
+                                                  "type": "number"
+                                                },
+                                                "ProductTypeSalesPrice": {
+                                                  "type": "number"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "ProductTypeSeasonEndDate": {
+                                        "type": "string",
+                                        "example": "2020-09-30T23:59:00+01:00"
+                                      },
+                                      "ProductTypeSeasonStartDate": {
+                                        "type": "string",
+                                        "example": "2020-06-24T00:00:00+01:00"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "HotelList": {
+                    "type": "object",
+                    "properties": {
+                      "Hotel": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "Checkin": {
+                              "type": "string",
+                              "example": "2020-08-08"
+                            },
+                            "Checkout": {
+                              "type": "string",
+                              "example": "2020-08-14"
+                            },
+                            "HotelOfferId": {
+                              "type": "string"
+                            },
+                            "ImageBaseUrl": {
+                              "type": "string"
+                            },
+                            "Images": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "Image": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "Image": {
+                                          "type": "object",
+                                          "properties": {
+                                            "Url": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        },
+                                        "ImageCategory": {
+                                          "type": "object",
+                                          "properties": {
+                                            "Code": {
+                                              "type": "string"
+                                            },
+                                            "Description": {
+                                              "type": "object",
+                                              "properties": {
+                                                "Text": {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "Value": {
+                                                      "type": "string"
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "Info": {
+                              "type": "object",
+                              "properties": {
+                                "Amenities": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "Amenity": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "Code": {
+                                              "type": "string"
+                                            },
+                                            "Description": {
+                                              "type": "string"
+                                            },
+                                            "Value": {
+                                              "type": "string"
+                                            },
+                                            "ComplimentaryInd": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "Code",
+                                            "Description"
+                                          ]
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "ChainCode": {
+                                  "type": "string"
+                                },
+                                "ChainName": {
+                                  "type": "string"
+                                },
+                                "CurrencyCode": {
+                                  "type": "string"
+                                },
+                                "Free": {
+                                  "type": "string",
+                                  "example": "True"
+                                },
+                                "HotelCode": {
+                                  "type": "string"
+                                },
+                                "HotelName": {
+                                  "type": "string"
+                                },
+                                "LocationInfo": {
+                                  "type": "object",
+                                  "properties": {
+                                    "Address": {
+                                      "type": "object",
+                                      "properties": {
+                                        "AddressLine1": {
+                                          "type": "string"
+                                        },
+                                        "CityName": {
+                                          "type": "object",
+                                          "properties": {
+                                            "CityCode": {
+                                              "type": "string"
+                                            },
+                                            "Value": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        },
+                                        "CountryName": {
+                                          "type": "object",
+                                          "properties": {
+                                            "Code": {
+                                              "type": "string"
+                                            },
+                                            "Value": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        },
+                                        "StateProv": {
+                                          "type": "object",
+                                          "properties": {
+                                            "StateCode": {
+                                              "type": "string"
+                                            },
+                                            "Value": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "Contact": {
+                                      "type": "object",
+                                      "properties": {
+                                        "Fax": {
+                                          "type": "string"
+                                        },
+                                        "Phone": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "Latitude": {
+                                      "type": "string"
+                                    },
+                                    "Longitude": {
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                "PropertyTypeInfo": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "Code": {
+                                        "type": "string"
+                                      },
+                                      "Description": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  }
+                                },
+                                "Rating": {
+                                  "type": "number"
+                                },
+                                "Recommended": {
+                                  "type": "string",
+                                  "example": "True"
+                                },
+                                "Reviews": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "Rate": {
+                                        "type": "number"
+                                      },
+                                      "ReviewCount": {
+                                        "type": "integer"
+                                      },
+                                      "Type": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "Room": {
+                              "type": "object",
+                              "properties": {
+                                "Amenities": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "Amenity": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "Code": {
+                                              "type": "string"
+                                            },
+                                            "Description": {
+                                              "type": "string"
+                                            },
+                                            "Value": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "Occupancy": {
+                                  "type": "object",
+                                  "properties": {
+                                    "Max": {
+                                      "type": "integer"
+                                    },
+                                    "Min": {
+                                      "type": "integer"
+                                    }
+                                  }
+                                },
+                                "RatePlans": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "RatePlan": {
+                                        "type": "object",
+                                        "properties": {
+                                          "AvailableQuantity": {
+                                            "type": "integer"
+                                          },
+                                          "MealsIncluded": {
+                                            "type": "object",
+                                            "properties": {
+                                              "Breakfast": {
+                                                "type": "string",
+                                                "example": "True"
+                                              },
+                                              "Dinner": {
+                                                "type": "string",
+                                                "example": "False"
+                                              },
+                                              "Lunch": {
+                                                "type": "string",
+                                                "example": "False"
+                                              },
+                                              "LunchOrDinner": {
+                                                "type": "string",
+                                                "example": "False"
+                                              }
+                                            }
+                                          },
+                                          "RateInfo": {
+                                            "type": "object",
+                                            "properties": {
+                                              "CancelPenalties": {
+                                                "type": "array",
+                                                "items": {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "CancelPenalty": {
+                                                      "type": "object",
+                                                      "properties": {
+                                                        "AmountPercent": {
+                                                          "type": "object",
+                                                          "properties": {
+                                                            "Amount": {
+                                                              "type": "number"
+                                                            },
+                                                            "CurrencyCode": {
+                                                              "type": "string"
+                                                            }
+                                                          }
+                                                        },
+                                                        "Deadline": {
+                                                          "type": "object",
+                                                          "properties": {
+                                                            "AbsoluteDeadline": {
+                                                              "type": "string",
+                                                              "example": "2020-08-06T23:59:00+04:00"
+                                                            }
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              },
+                                              "CurrencyCode": {
+                                                "type": "string"
+                                              },
+                                              "NetRate": {
+                                                "type": "number"
+                                              },
+                                              "Offers": {
+                                                "type": "array",
+                                                "items": {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "Amount": {
+                                                      "type": "number"
+                                                    },
+                                                    "Code": {
+                                                      "type": "string"
+                                                    },
+                                                    "Name": {
+                                                      "type": "string"
+                                                    }
+                                                  }
+                                                }
+                                              },
+                                              "TaxInclusive": {
+                                                "type": "string",
+                                                "example": "True"
+                                              },
+                                              "Taxes": {
+                                                "type": "array",
+                                                "items": {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "Tax": {
+                                                      "type": "object",
+                                                      "properties": {
+                                                        "Amount": {
+                                                          "type": "number"
+                                                        },
+                                                        "CurrencyCode": {
+                                                          "type": "string"
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          },
+                                          "RateKey": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "RoomCategory": {
+                                  "type": "string"
+                                },
+                                "RoomDescription": {
+                                  "type": "object",
+                                  "properties": {
+                                    "Name": {
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                "RoomType": {
+                                  "type": "string"
+                                },
+                                "RoomTypeCode": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ]
+}
